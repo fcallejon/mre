@@ -7,6 +7,8 @@ functions:
     lang: csharp-httprequest
     handler: ./src/score-document/score-document
     image: fcallejon/score-document:latest
+    environment_file:
+      - random_org_apikey.yml
   mureui:
     lang: python3-http
     handler: ./src/mureui/mureui

@@ -3,6 +3,7 @@
 ## CI/CD
 
 It uses GitHub actions and assumes there is a AKS available
+All secrets are in GitHub
 
 ## How to run it (assuming on a Windows)
 

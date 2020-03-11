@@ -22,6 +22,11 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
+    - name: Prepare env file
+      run: |
+        echo "environment:" > ./src/score-document/random_org_apikey.yml
+        echo ' RANDOM_ORG_API_KEY: "${{ secrets.RANDOM_ORG_API_KEY }}"' >> ./src/score-document/random_org_apikey.yml
+
     - name: OpenFaaS build and push
       uses: mrsimpson/action-openfaas-build@0.3.0
       with:
@@ -39,4 +44,3 @@ jobs:
         openfaas-username: admin
         # Password for authenticating at OpenFaaS gateway
         openfaas-password: ${{ secrets.OPENFAAS_PASS }}
-
