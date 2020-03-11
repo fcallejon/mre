@@ -5,6 +5,15 @@
 It uses GitHub actions and assumes there is a AKS available
 All secrets are in GitHub
 
+## Missing stuff:
+
+1. Unit test
+2. Monitoring
+3. Logging
+4. Auth
+5. Proper AKS/OpenFaas setup (sec mainly)
+6. Versioning for correct CD
+
 ## How to run it (assuming on a Windows)
 
 ### Pre-requisites
