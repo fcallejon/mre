@@ -93,7 +93,7 @@
                 documents: Array.prototype.map.call(document.querySelector("form").querySelectorAll('textarea'), el => el.value)
             };
             $.ajax({
-                url: 'http://localhost:31112/function/score-document.openfaas-fn',
+                url: '/function/score-document.openfaas-fn',
                 type: "POST",
                 data: JSON.stringify(body),
                 success: e => {
