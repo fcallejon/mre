@@ -28,15 +28,15 @@ jobs:
         # The OpenFaaS function definition file
         stack-file: stack.yml
         # Your docker username with push authorization
-        docker-username: $DOCKER_LOGIN
+        docker-username: ${{ secrets.DOCKER_LOGIN }}
         # Your docker password
-        docker-password: $DOCKER_PASS
+        docker-password: ${{ secrets.DOCKER_PASS }}
         # Whether the built image shall be deployed (false=no, true=yes)
         deploy: true
         # OpenFaaS gateway URL (http(s)://my-public-gateway.tld)
-        openfaas-gateway: $OPENFAAS_GATEWAY
+        openfaas-gateway: ${{ secrets.OPENFAAS_GATEWAY }}
         # User for authenticating at OpenFaaS gateway
         openfaas-username: admin
         # Password for authenticating at OpenFaaS gateway
-        openfaas-password: $OPENFAAS_PASS
+        openfaas-password: ${{ secrets.OPENFAAS_PASS }}
         
