@@ -1,8 +1,8 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: CI/CD
 
-# Controls when the action will run. Triggers the workflow on push or pull request 
+# Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
   push:
@@ -39,4 +39,4 @@ jobs:
         openfaas-username: admin
         # Password for authenticating at OpenFaaS gateway
         openfaas-password: ${{ secrets.OPENFAAS_PASS }}
-        
+
