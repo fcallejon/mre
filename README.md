@@ -1,5 +1,9 @@
 # MuRe Scoring
 
+## CI/CD
+
+It uses GitHub actions and assumes there is a AKS available
+
 ## How to run it (assuming on a Windows)
 
 ### Pre-requisites

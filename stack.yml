@@ -1,0 +1,13 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8080
+functions:
+  score-document:
+    lang: csharp-httprequest
+    handler: ./src/score-document/score-document
+    image: fcallejon/score-document:latest
+  mureui:
+    lang: python3-http
+    handler: ./src/mureui/mureui
+    image: fcallejon/mureui:latest

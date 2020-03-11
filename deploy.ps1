@@ -17,6 +17,8 @@ docker login
 
 Write-Host "Switching to score-document folder"
 cd src\score-document
+Remove-Item build -Recurse -Force -Confirm:$false -ErrorAction Ignore
+Remove-Item template -Recurse -Force -Confirm:$false -ErrorAction Ignore
 
 Write-Host "Pulling template"
 faas-cli template store pull csharp-httprequest
@@ -35,6 +37,11 @@ faas-cli.exe deploy --image=$docker_user_name/score-document --name=score-docume
 
 Write-Host "Switching to UI folder"
 cd ..\mureui
+Remove-Item build -Recurse -Force -Confirm:$false -ErrorAction Ignore
+Remove-Item template -Recurse -Force -Confirm:$false -ErrorAction Ignore
+
+Write-Host "Pulling template"
+faas-cli template pull https://github.com/openfaas-incubator/python-flask-template
 
 Write-Host "Building mureui function"
 faas-cli.exe build -f .\mureui.yml
