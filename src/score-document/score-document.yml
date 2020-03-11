@@ -1,0 +1,8 @@
+version: 1.0
+provider:
+  name: openfaas
+functions:
+  test:
+    lang: csharp-httprequest
+    handler: ./score-document
+    image: score-document:latest

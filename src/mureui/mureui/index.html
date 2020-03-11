@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <title>MuRe Scoring</title>
+
+    <link rel="stylesheet" href="/function/mureui?f=css/bootstrap.min.css" />
+</head>
+
+<body>
+    <main>
+        <strong>Score some docs</strong>
+        <button type="button" class="btn btn-outline-primary btn-sm" id="addDocument">
+            Add new Document
+        </button>
+        <form id="docsForm">
+
+            <div class="form-group docsFormControls">
+                <button type="button" class="btn btn-outline-primary btn-sm" id="removeLast">
+                    Remove Last
+                </button>
+                <button type="submit" class="btn btn-primary" id="submitDocs">
+                    <span class="spinner-border spinner-border-sm" hidden role="status" aria-hidden="true"></span>
+                    Submit
+                </button>
+            </div>
+        </form>
+
+        <table class="table" id="results">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Score</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </main>
+
+    <script src="/function/mureui?f=js/jquery.min.js"></script>
+    <script src="/function/mureui?f=js/bootstrap.min.js"></script>
+
+    <script id="docEditor" type="template">
+        <div class="form-group row editor">
+            <label for="content" class="col-sm-2 col-form-label">Content</label>
+            <div class="col-sm-10">
+                <textarea id="content" required="" placeholder="Content" rows="4"
+                    class="form-control valid"></textarea>
+            </div>
+        </div>
+        <hr />
+    </script>
+
+    <script id="resultTemplate" type="template">
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+    </script>
+
+    <script language="javascript">
+
+        $(document).ready(() => {
+            $('#addDocument').click(addDocumentEditor);
+            $('#removeLast').click(removeLastEditor);
+            $('#submitDocs').click(submitDocs);
+        });
+
+        function addDocumentEditor() {
+            const newEditor = fixIds($($('#docEditor').html()), $('#docsForm').children().length);
+            $(newEditor).insertBefore('.docsFormControls');
+        }
+
+        function removeLastEditor() {
+            $('#docsForm').find('.editor').last().remove();
+        }
+
+        function fixIds(template, index) {
+            $(template).find('label[for="content"]').attr("for", `content-${index}`);
+            $(template).find('#content').attr("id", `content-${index}`);
+
+            return template;
+        }
+
+        function submitDocs(e) {
+            e.preventDefault();
+
+            const body = {
+                documents: Array.prototype.map.call(document.querySelector("form").querySelectorAll('textarea'), el => el.value)
+            };
+            $.ajax({
+                url: 'http://localhost:31112/function/score-document.openfaas-fn',
+                type: "POST",
+                data: JSON.stringify(body),
+                success: e => {
+                    loadResults(e);
+                },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            });
+        }
+
+        function loadResults(results) {
+            const templateHtml = $('#resultTemplate').html();
+            const tableBody = $('#results').children('tbody');
+            tableBody.children('tr').remove();
+            results.forEach(r => {
+                const row = $(templateHtml);
+                const tds = row.children('td');
+                tds[0].innerText = r.id;
+                tds[1].innerText = r.score;
+
+                tableBody.append(row);
+            });
+        }
+    </script>
+</body>
+
+</html>
