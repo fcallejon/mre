@@ -1,9 +1,12 @@
 # MuRe Scoring
 
+GCP running version [here](http://34.68.124.162:8080/function/mureui)
+
 ## CI/CD
 
 It uses GitHub actions and assumes there is a AKS available
-All secrets are in GitHub
+
+All secrets for GitHub Actions are in GitHub Secrets.
 
 ## Missing stuff:
 
@@ -18,9 +21,9 @@ All secrets are in GitHub
 
 ### Pre-requisites
 
-1. Install OpenFaas: [here](https://docs.openfaas.com/deployment/kubernetes/#c-deploy-using-kubectl-and-plain-yaml-for-development-only)
-2. Install Docker
-3. Get a Docker account and login locally
+1. Install Docker
+2. Get a Docker account and login locally
+3. Install OpenFaas: [here](https://docs.openfaas.com/deployment/kubernetes/#c-deploy-using-kubectl-and-plain-yaml-for-development-only)
 
 ### Run it
 
