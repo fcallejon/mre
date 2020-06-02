@@ -1,7 +1,5 @@
 # MuRe Scoring
 
-GCP running version [here](http://34.68.124.162:8080/function/mureui)
-
 ## CI/CD
 
 It uses GitHub actions and assumes there is a AKS available
