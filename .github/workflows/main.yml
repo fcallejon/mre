@@ -8,9 +8,9 @@ on:
   repository_dispatch:
     types: re-deploy-please
   push:
-    # branches: [ master ]
+    branches: [ master ]
   pull_request:
-    # branches: [ master ]
+    branches: [ master ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -24,22 +24,22 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
-    - name: OpenFaaS build and push
-      uses: mrsimpson/action-openfaas-build@0.3.0
-      env:
-        RANDOM_ORG_API_KEY: "${{ secrets.RANDOM_ORG_API_KEY }}"
-      with:
-        # The OpenFaaS function definition file
-        stack-file: stack.yml
-        # Your docker username with push authorization
-        docker-username: ${{ secrets.DOCKER_LOGIN }}
-        # Your docker password
-        docker-password: ${{ secrets.DOCKER_PASS }}
-        # Whether the built image shall be deployed (false=no, true=yes)
-        deploy: true
-        # OpenFaaS gateway URL (http(s)://my-public-gateway.tld)
-        openfaas-gateway: ${{ secrets.OPENFAAS_GATEWAY }}
-        # User for authenticating at OpenFaaS gateway
-        openfaas-username: admin
-        # Password for authenticating at OpenFaaS gateway
-        openfaas-password: ${{ secrets.OPENFAAS_PASS }}
+    # - name: OpenFaaS build and push
+    #   uses: mrsimpson/action-openfaas-build@0.3.0
+    #   env:
+    #     RANDOM_ORG_API_KEY: "${{ secrets.RANDOM_ORG_API_KEY }}"
+    #   with:
+    #     # The OpenFaaS function definition file
+    #     stack-file: stack.yml
+    #     # Your docker username with push authorization
+    #     docker-username: ${{ secrets.DOCKER_LOGIN }}
+    #     # Your docker password
+    #     docker-password: ${{ secrets.DOCKER_PASS }}
+    #     # Whether the built image shall be deployed (false=no, true=yes)
+    #     deploy: true
+    #     # OpenFaaS gateway URL (http(s)://my-public-gateway.tld)
+    #     openfaas-gateway: ${{ secrets.OPENFAAS_GATEWAY }}
+    #     # User for authenticating at OpenFaaS gateway
+    #     openfaas-username: admin
+    #     # Password for authenticating at OpenFaaS gateway
+    #     openfaas-password: ${{ secrets.OPENFAAS_PASS }}
